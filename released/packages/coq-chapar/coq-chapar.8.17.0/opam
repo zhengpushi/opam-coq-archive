@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+
+homepage: "https://github.com/coq-community/chapar"
+dev-repo: "git+https://github.com/coq-community/chapar.git"
+bug-reports: "https://github.com/coq-community/chapar/issues"
+license: "MIT"
+
+synopsis: "A framework for verification of causal consistency for distributed key-value stores and their clients in Coq"
+description: """
+A framework for modular verification of causal consistency for replicated key-value
+store implementations and their client programs in Coq. Includes proofs of the causal consistency
+of two key-value store implementations and a simple automatic model checker for the correctness
+of client programs."""
+
+build: [make "-j%{jobs}%"]
+install: [make "install"]
+depends: [
+  "coq" {>= "8.14"}
+]
+
+tags: [
+  "category:Computer Science/Concurrent Systems and Protocols/Theory of concurrent systems"
+  "keyword:causal consistency"
+  "keyword:key-value stores"
+  "keyword:distributed algorithms"
+  "keyword:program verification"
+  "logpath:Chapar"
+  "date:2023-12-28"
+]
+authors: [
+  "Mohsen Lesani"
+  "Christian J. Bell"
+  "Adam Chlipala"
+]
+
+url {
+  src: "https://github.com/coq-community/chapar/releases/download/v8.17.0/chapar-8.17.0.tar.gz"
+  checksum: "sha512=3063a748bcb601f4dad385cce11a9fa385c079eb567abe22dafa8adb9e3d860cc85995cfcf5382228dd335390c4f3bb6ecc2f65c31c2fb830581ffda6d600b6c"
+}

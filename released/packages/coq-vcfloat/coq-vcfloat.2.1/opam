@@ -15,19 +15,22 @@ dev-repo: "git+https://github.com/VeriNum/vcfloat"
 bug-reports: "https://github.com/VeriNum/vcfloat/issues"
 license: "LGPL-3.0-or-later"
 
+patches: [
+  "0001-coq-native-compat.patch"
+]
 build: [
-  [ make "-C" "vcfloat" "-j%{jobs}%" "vcfloat2"]
+  [ make "-C" "vcfloat" "-j%{jobs}%" "vcfloat2" "COQEXTRAFLAGS=-native-compiler ondemand" {coq-native:installed & coq-compcert:version < "3.13~"}]
 ]
 install: [
-  [make "-C" "vcfloat" "-j%{jobs}%" "install" "INSTALLDIR=%{lib}%/coq/user-contrib/vcfloat"]
+  [make "-C" "vcfloat" "-j%{jobs}%" "install" "INSTALLDIR=%{lib}%/coq/user-contrib/vcfloat" "COQEXTRAFLAGS=-native-compiler ondemand" {coq-native:installed & coq-compcert:version < "3.13~"}]
 ]
 run-test: [
-  [make "-C" "vcfloat" "-j%{jobs}%" "tests"]
+  [make "-C" "vcfloat" "-j%{jobs}%" "tests" "COQEXTRAFLAGS=-native-compiler ondemand" {coq-native:installed & coq-compcert:version < "3.13~"}]
 ]
 depends: [
   "coq" {>= "8.16" & < "8.18~"}
   "coq-flocq" {>= "4.1.0" & < "5.0"}
-  "coq-interval" {>= "4.5.2"}
+  "coq-interval" {>= "4.5.2" & < "4.8.0"}
   "coq-compcert" {>= "3.11"}
   "coq-bignums"
 ]

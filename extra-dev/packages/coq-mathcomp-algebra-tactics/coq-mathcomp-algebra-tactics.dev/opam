@@ -6,23 +6,27 @@ dev-repo: "git+https://github.com/math-comp/algebra-tactics.git"
 bug-reports: "https://github.com/math-comp/algebra-tactics/issues"
 license: "CECILL-B"
 
-synopsis: "Ring and field tactics for Mathematical Components"
+synopsis: "Ring, field, lra, nra, and psatz tactics for Mathematical Components"
 description: """
-This library provides `ring` and `field` tactics for Mathematical Components,
-that work with any `comRingType` and `fieldType` instances, respectively.
-Their instance resolution is done through canonical structure inference.
-Therefore, they work with abstract rings and do not require `Add Ring` and
-`Add Field` commands. Another key feature of this library is that they
+This library provides `ring`, `field`, `lra`, `nra`, and `psatz` tactics for
+the Mathematical Components library. These tactics use the algebraic
+structures defined in the MathComp library and their canonical instances for
+the instance resolution, and do not require any special instance declaration,
+like the `Add Ring` and `Add Field` commands. Therefore, each of these tactics
+works with any instance of the respective structure, including concrete
+instances declared through Hierarchy Builder, abstract instances, and mixed
+concrete and abstract instances, e.g., `int * R` where `R` is an abstract
+commutative ring. Another key feature of Algebra Tactics is that they
 automatically push down ring morphisms and additive functions to leaves of
-ring/field expressions before normalization to the Horner form."""
+ring/field expressions before applying the proof procedures."""
 
-build: [make "-j%{jobs}%" ]
+build: [make "-j%{jobs}%"]
 install: [make "install"]
 depends: [
   "coq" {>= "8.16"}
-  "coq-mathcomp-ssreflect" {>= "1.15"}
+  "coq-mathcomp-ssreflect" {>= "2.0"}
   "coq-mathcomp-algebra"
-  "coq-mathcomp-zify" {>= "1.1.0"}
+  "coq-mathcomp-zify" {>= "1.5.0"}
   "coq-elpi" {>= "1.15.0" & != "1.17.0"}
 ]
 
@@ -31,6 +35,7 @@ tags: [
 ]
 authors: [
   "Kazuhiko Sakaguchi"
+  "Pierre Roux"
 ]
 url {
   src: "git+https://github.com/math-comp/algebra-tactics.git#master"
